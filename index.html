@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>药学文化节 · 关卡学习题库</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%23B23A28'/%3E%3Ctext x='32' y='45' font-size='36' font-family='serif' text-anchor='middle' fill='%23F6F3E9'%3E药%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+:root{
+  --ink:#1A2320;
+  --ink-soft:#4E5C55;
+  --paper:#F6F3E9;
+  --paper-2:#EDE8D8;
+  --card:#FCFAF2;
+  --herb:#174F3E;
+  --herb-deep:#0E3A2D;
+  --cinnabar:#B23A28;
+  --gold:#B08A34;
+  --line:rgba(23,79,62,.16);
+  --line-strong:rgba(23,79,62,.3);
+  --serif:"Noto Serif SC","Songti SC","SimSun",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.75;
+  background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(23,79,62,.035) 27px 28px);
+}
+h1,h2,h3{font-family:var(--serif);font-weight:700;margin:0}
+button{font-family:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cinnabar);outline-offset:3px}
+
+.site-head{position:sticky;top:0;z-index:30;background:rgba(246,243,233,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.head-in{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px}
+.seal{width:32px;height:32px;flex:none;display:grid;place-items:center;background:var(--cinnabar);color:#F8F4E7;font-family:var(--serif);font-size:19px;border-radius:2px}
+.brand{font-family:var(--serif);font-size:15px;line-height:1.3}
+.brand span{display:block;font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);letter-spacing:.06em}
+.nav{margin-left:auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.navbtn{flex:none;border:1px solid transparent;background:none;color:var(--ink-soft);font-size:14px;padding:0 12px;min-height:40px;border-radius:2px;cursor:pointer;white-space:nowrap}
+.navbtn:hover{color:var(--herb);border-color:var(--line)}
+.navbtn[aria-current="true"]{color:var(--herb);border-color:var(--line-strong);background:var(--paper-2);font-weight:500}
+
+.hero{max-width:1120px;margin:0 auto;padding:44px 20px 36px;display:grid;gap:34px}
+.hero-copy{align-self:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--cinnabar);letter-spacing:.1em}
+.kicker::before{content:"";width:22px;height:1px;background:var(--cinnabar)}
+h1{font-size:clamp(34px,8vw,58px);line-height:1.14;margin:12px 0 16px;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--herb)}
+.lede{color:var(--ink-soft);font-size:15.5px;max-width:33em;margin:0}
+.facts{display:flex;flex-wrap:wrap;gap:22px 30px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.fact{min-width:74px}
+.fact b{display:block;font-family:var(--serif);font-size:28px;line-height:1.1;color:var(--herb)}
+.fact span{font-size:12.5px;color:var(--ink-soft)}
+.cabinet-wrap{position:relative;padding:6px 0}
+.cabinet{width:100%;max-width:440px;display:block;margin:0 auto;filter:drop-shadow(0 20px 28px rgba(14,58,45,.18))}
+.dr{opacity:0;animation:drIn .6s cubic-bezier(.2,.75,.2,1) forwards;animation-delay:var(--d)}
+@keyframes drIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cab-note{text-align:center;font-size:12.5px;color:var(--ink-soft);margin-top:12px}
+
+.levels{max-width:1120px;margin:0 auto;padding:0 20px 60px}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--herb);padding-bottom:9px}
+.sec-head h2{font-size:22px}
+.sec-head p{margin:0;font-size:13px;color:var(--ink-soft)}
+.level-row{display:grid;grid-template-columns:58px 1fr;gap:6px 16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.no{font-family:var(--serif);font-size:36px;line-height:1;color:var(--herb);letter-spacing:.02em}
+.no small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.16em;color:var(--ink-soft);margin-top:4px}
+.level-name{font-size:18.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.chip{font-size:12px;color:var(--herb);border:1px solid var(--line);border-radius:2px;padding:2px 8px;background:rgba(255,255,255,.5)}
+.chip.best{color:var(--cinnabar);border-color:rgba(178,58,40,.28)}
+.level-play{margin:6px 0 0;color:var(--ink-soft);font-size:14px;max-width:38em}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn{min-height:44px;padding:0 18px;font-size:14.5px;border-radius:2px;cursor:pointer;border:1px solid transparent;transition:background .18s,border-color .18s,color .18s}
+.btn-primary{background:var(--herb);color:#F7F4E9;border-color:var(--herb)}
+.btn-primary:hover{background:var(--herb-deep);border-color:var(--herb-deep)}
+.btn-ghost{background:transparent;color:var(--herb);border-color:var(--line-strong)}
+.btn-ghost:hover{background:rgba(23,79,62,.06)}
+.pending{margin-top:26px;padding:18px 18px 20px;border:1px dashed rgba(23,79,62,.32);border-radius:2px;background:rgba(255,255,255,.4)}
+.pending h3{font-size:15px;color:var(--herb);margin-bottom:4px}
+.pending p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+
+.view{max-width:900px;margin:0 auto;padding:32px 20px 80px}
+.view-head{border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:6px}
+.crumb{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--ink-soft);margin-bottom:14px}
+.crumb button{background:none;border:0;padding:0;font-size:12.5px;color:var(--herb);cursor:pointer;text-decoration:underline;text-underline-offset:3px;min-height:40px}
+.view-no{font-family:var(--serif);font-size:13px;letter-spacing:.12em;color:var(--cinnabar)}
+.view-head h1{font-size:clamp(28px,6vw,40px);margin:2px 0 10px}
+.view-goal{font-size:14.5px;color:var(--ink-soft);max-width:42em;margin:0}
+.modes{position:sticky;top:57px;z-index:20;display:flex;gap:0;background:var(--paper);padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:8px}
+.modebtn{flex:1;min-height:44px;border:1px solid var(--line-strong);background:transparent;color:var(--herb);font-size:14.5px;cursor:pointer;padding:0 10px}
+.modebtn:first-child{border-right:0}
+.modebtn[aria-pressed="true"]{background:var(--herb);color:#F7F4E9;border-color:var(--herb)}
+.card-note{font-size:12.5px;color:var(--ink-soft);margin:14px 0 0}
+
+.group-title{display:flex;align-items:baseline;gap:10px;margin:30px 0 6px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.group-title h3{font-size:16.5px;color:var(--herb)}
+.group-title span{font-size:12px;color:var(--ink-soft)}
+.pair-row{display:grid;gap:2px;padding:11px 0;border-bottom:1px dashed rgba(23,79,62,.18)}
+.pair-a{font-family:var(--serif);font-size:16.5px;font-weight:600}
+.pair-b{font-size:14px;color:var(--ink-soft)}
+.judge-item{display:grid;grid-template-columns:34px 1fr;gap:0 10px;padding:14px 0;border-bottom:1px dashed rgba(23,79,62,.18)}
+.judge-idx{font-family:var(--serif);font-size:13px;color:var(--ink-soft);padding-top:3px}
+.judge-s{margin:0;font-size:15px;line-height:1.65}
+.tag{display:inline-block;font-size:11.5px;line-height:1.6;padding:0 7px;border-radius:2px;vertical-align:2px;margin-right:6px;border:1px solid}
+.tag.t{color:#1E6B4F;border-color:rgba(30,107,79,.4);background:rgba(30,107,79,.07)}
+.tag.f{color:var(--cinnabar);border-color:rgba(178,58,40,.35);background:rgba(178,58,40,.06)}
+.exp{margin:6px 0 0;font-size:13.5px;color:var(--ink-soft);border-left:2px solid var(--line-strong);padding-left:9px}
+.cats{display:grid;gap:12px;margin-top:22px}
+.cat{border:1px solid var(--line);background:rgba(255,255,255,.55);padding:14px 14px 16px;border-radius:2px}
+.cat h4{margin:0 0 8px;font-family:var(--serif);font-size:15.5px;color:var(--herb);display:flex;align-items:center;gap:8px}
+.cat h4::before{content:"";width:6px;height:6px;background:var(--gold);border-radius:50%;flex:none}
+.drugs{display:flex;flex-wrap:wrap;gap:6px}
+.drug{font-size:12.5px;color:var(--ink);background:var(--paper-2);border-radius:2px;padding:3px 9px}
+.faq{margin-top:22px;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{width:100%;min-height:48px;display:flex;align-items:flex-start;gap:10px;text-align:left;background:none;border:0;padding:14px 0;font-size:15px;font-weight:500;color:var(--ink);cursor:pointer}
+.faq-q .plus{margin-left:auto;flex:none;font-family:var(--serif);color:var(--herb);font-size:16px;transition:transform .2s}
+.faq-item.open .plus{transform:rotate(45deg)}
+.faq-a{display:none;padding:0 0 16px 26px;font-size:14px;color:var(--ink-soft)}
+.faq-item.open .faq-a{display:block}
+
+.quiz-box{border:1px solid var(--line);background:var(--card);padding:20px;border-radius:2px;margin-top:20px}
+.qbar{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--ink-soft)}
+.qbar b{font-family:var(--serif);color:var(--herb);font-size:14px}
+.track{height:2px;background:rgba(23,79,62,.14);margin:10px 0 18px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--herb);transition:width .25s}
+.qtext{font-family:var(--serif);font-size:19px;line-height:1.65;margin:0 0 18px;font-weight:600}
+.opt{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;background:#fff;border:1px solid rgba(23,79,62,.22);border-radius:2px;padding:12px 14px;margin-bottom:9px;font-size:15px;line-height:1.55;cursor:pointer;min-height:48px;transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:var(--herb)}
+.opt .k{font-family:var(--serif);color:var(--herb);flex:none;font-size:14px;padding-top:1px}
+.opt[disabled]{cursor:default}
+.opt.correct{background:#EAF2EC;border-color:#2E7D5B}
+.opt.correct .k{color:#2E7D5B}
+.opt.wrong{background:#F9ECE9;border-color:var(--cinnabar)}
+.opt.wrong .k{color:var(--cinnabar)}
+.opt.dim{opacity:.55}
+.feedback{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:14px}
+.feedback .verdict{font-family:var(--serif);font-size:15px;display:block;margin-bottom:4px}
+.feedback .verdict.ok{color:#2E7D5B}
+.feedback .verdict.no{color:var(--cinnabar)}
+.feedback p{margin:0;color:var(--ink-soft)}
+.quiz-foot{display:flex;justify-content:flex-end;margin-top:16px}
+.result{text-align:left}
+.result .score{font-family:var(--serif);font-size:44px;line-height:1;color:var(--herb)}
+.result .score span{font-size:16px;color:var(--ink-soft)}
+.result .rate{font-size:14px;color:var(--ink-soft);margin:8px 0 0}
+.result h3{font-size:16px;margin:24px 0 8px;color:var(--herb)}
+.miss{display:grid;gap:10px}
+.miss-item{border-left:2px solid var(--cinnabar);padding:2px 0 2px 10px;font-size:14px}
+.miss-item b{display:block;font-weight:500;color:var(--ink)}
+.miss-item span{color:var(--ink-soft);font-size:13px}
+.result-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
+@media(min-width:640px){
+  .pair-row{grid-template-columns:230px 1fr;align-items:baseline;gap:18px}
+  .cats{grid-template-columns:1fr 1fr}
+  .quiz-box{padding:28px}
+}
+@media(min-width:900px){
+  .hero{grid-template-columns:1.08fr .92fr;align-items:center;padding:64px 20px 48px}
+  .level-row{grid-template-columns:96px 1fr auto;align-items:center;gap:24px;padding:24px 0}
+  .no{font-size:42px}
+  .actions{margin-top:0;flex-direction:column;align-items:flex-end}
+  .level-play{font-size:14.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .dr{animation:none;opacity:1}
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="head-in">
+    <div class="seal" aria-hidden="true">药</div>
+    <div class="brand">药学文化节<span>关卡学习题库</span></div>
+    <nav class="nav" id="nav" aria-label="关卡导航">
+      <button class="navbtn" data-go="" aria-current="true">总览</button>
+      <button class="navbtn" data-go="level2">02 连连看</button>
+      <button class="navbtn" data-go="level3">03 传送带</button>
+      <button class="navbtn" data-go="level4">04 投壶</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="hub">
+    <div class="hero">
+      <div class="hero-copy">
+        <span class="kicker">赛前十分钟，先把题学会</span>
+        <h1>先认得药，<br><em>再上场比赛</em></h1>
+        <p class="lede">三个关卡，三套题库。每关都配了知识点速览和即时判分的自测，扫码就能在手机上过一遍——配对靠眼熟，判断靠常识，投壶靠归类。</p>
+        <div class="facts">
+          <div class="fact"><b>44</b><span>道自测题</span></div>
+          <div class="fact"><b>3</b><span>个关卡</span></div>
+          <div class="fact"><b>28</b><span>组配对与分类</span></div>
+          <div class="fact"><b>6</b><span>张用药安全卡</span></div>
+        </div>
+      </div>
+      <div class="cabinet-wrap">
+        <svg class="cabinet" viewBox="0 0 460 470" role="img" aria-label="中药柜示意图，每格标有活动中出现的药品名称">
+          <rect x="8" y="8" width="444" height="454" rx="4" fill="#0E3A2D"/>
+          <rect x="20" y="20" width="420" height="430" rx="2" fill="#123F31"/>
+          <!-- drawers injected animation via markup -->
+          <g class="dr" style="--d:.05s"><rect x="34" y="34" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="46" y="48" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="96" y="68" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">布洛芬</text><circle cx="96" cy="102" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.13s"><rect x="168" y="34" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="180" y="48" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="230" y="68" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">阿莫西林</text><circle cx="230" cy="102" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.21s"><rect x="302" y="34" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="314" y="48" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="364" y="68" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">金银花</text><circle cx="364" cy="102" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.29s"><rect x="34" y="139" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="46" y="153" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="96" y="173" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">山楂</text><circle cx="96" cy="207" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.37s"><rect x="168" y="139" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="180" y="153" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="230" y="173" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">蒙脱石散</text><circle cx="230" cy="207" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.45s"><rect x="302" y="139" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="314" y="153" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="364" y="173" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">奥美拉唑</text><circle cx="364" cy="207" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.53s"><rect x="34" y="244" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="46" y="258" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="96" y="278" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">硝酸甘油</text><circle cx="96" cy="312" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.61s"><rect x="168" y="244" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="180" y="258" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="230" y="278" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">炉甘石</text><circle cx="230" cy="312" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.69s"><rect x="302" y="244" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="314" y="258" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="364" y="278" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">维生素C</text><circle cx="364" cy="312" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.77s"><rect x="34" y="349" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="46" y="363" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="96" y="383" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">氯雷他定</text><circle cx="96" cy="417" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.85s"><rect x="168" y="349" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="180" y="363" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="230" y="383" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">碘伏</text><circle cx="230" cy="417" r="4" fill="#C9AE6B"/></g>
+          <g class="dr" style="--d:.93s"><rect x="302" y="349" width="124" height="95" rx="1" fill="#1B5B46" stroke="rgba(201,174,107,.45)"/><rect x="314" y="363" width="100" height="30" rx="1" fill="#F2EEDF"/><text x="364" y="383" text-anchor="middle" font-size="13" font-family="Noto Serif SC,serif" fill="#174F3E">二甲双胍</text><circle cx="364" cy="417" r="4" fill="#C9AE6B"/></g>
+        </svg>
+        <p class="cab-note">柜里十二格药名，都是三个关卡题面上出现过的</p>
+      </div>
+    </div>
+
+    <div class="levels">
+      <div class="sec-head">
+        <h2>按关卡选题库</h2>
+        <p>先看知识卡，再来自测</p>
+      </div>
+      <div id="levelList"></div>
+      <div class="pending">
+        <h3>第一关暂无题目</h3>
+        <p>这份文档里只有第二、三、四关的内容。把第一关的题目发来，会按同样格式补一页题库，并单独生成一张二维码。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="levelView" class="view" hidden></section>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  var LEVELS = [
+    {
+      id:"level2", no:"02", name:"药学连连看", tag:"配对",
+      play:"抽一张药卡，把药品和对应的功效或分类连起来，连对得分。",
+      goal:"20 组对应关系要能在三秒内反应过来——赛场上拼的就是这个速度。",
+      count:20, modeLabel:"20 道单选题",
+      cards:"pairs",
+      pairs:[
+        {g:"药品与功效", a:"布洛芬", b:"缓解轻中度疼痛、解热镇痛（退烧、止痛）"},
+        {g:"药品与功效", a:"对乙酰氨基酚", b:"解热镇痛（退烧、缓解头痛、牙痛等）"},
+        {g:"药品与功效", a:"阿莫西林", b:"抗菌消炎（青霉素类抗生素）"},
+        {g:"药品与功效", a:"复方氨酚烷胺胶囊", b:"缓解感冒引起的发热、鼻塞、流涕、头痛等症状"},
+        {g:"药品与功效", a:"健胃消食片", b:"消食化积、健脾开胃，缓解食积、腹胀"},
+        {g:"药品与功效", a:"炉甘石洗剂", b:"收敛、止痒，用于蚊虫叮咬、湿疹等皮肤瘙痒"},
+        {g:"药品与功效", a:"氯苯那敏（扑尔敏）", b:"抗过敏，缓解打喷嚏、流涕等过敏症状"},
+        {g:"药品与功效", a:"二甲双胍", b:"降低血糖，用于 2 型糖尿病"},
+        {g:"药品与功效", a:"硝酸甘油", b:"扩张冠状动脉，缓解心绞痛"},
+        {g:"药品与功效", a:"钙片", b:"补充钙质，预防和改善骨质疏松、手足抽筋"},
+        {g:"药品与分类", a:"青霉素", b:"抗生素（β-内酰胺类）"},
+        {g:"药品与分类", a:"左氧氟沙星", b:"抗生素（喹诺酮类）"},
+        {g:"药品与分类", a:"金银花", b:"清热解毒类中药"},
+        {g:"药品与分类", a:"山楂", b:"消食化积类中药"},
+        {g:"药品与分类", a:"复方甘草片", b:"镇咳祛痰类中成药"},
+        {g:"药品与分类", a:"蒙脱石散", b:"止泻药"},
+        {g:"药品与分类", a:"奥美拉唑", b:"抑酸护胃药（质子泵抑制剂）"},
+        {g:"药品与分类", a:"维生素 C 片", b:"维生素补充剂"},
+        {g:"药品与分类", a:"皮炎平（复方醋酸地塞米松乳膏）", b:"外用糖皮质激素药"},
+        {g:"药品与分类", a:"云南白药气雾剂", b:"外用活血散瘀、消肿止痛药"}
+      ],
+      qs:[
+        {q:"「布洛芬」的主要功效是什么？", o:["缓解轻中度疼痛、解热镇痛","抗菌消炎，治疗细菌感染","降低血糖，用于 2 型糖尿病","抗过敏，缓解打喷嚏、流涕"], a:0, e:"布洛芬是解热镇痛药，用于退烧、止痛。"},
+        {q:"「对乙酰氨基酚」对应哪项功效？", o:["收敛止痒，用于皮肤瘙痒","解热镇痛（退烧、缓解头痛牙痛）","扩张冠状动脉，缓解心绞痛","消食化积、健脾开胃"], a:1, e:"对乙酰氨基酚同样走解热镇痛这条路，退烧、止痛。"},
+        {q:"「阿莫西林」属于哪一类？", o:["青霉素类抗生素（抗菌消炎）","喹诺酮类抗生素","抗过敏药","维生素补充剂"], a:0, e:"阿莫西林是青霉素类抗生素，只对细菌有效。"},
+        {q:"复方氨酚烷胺胶囊主要用来缓解什么？", o:["心绞痛","感冒引起的发热、鼻塞、流涕、头痛","腹泻","骨质疏松"], a:1, e:"它是复方感冒药，覆盖感冒的多个症状。"},
+        {q:"健胃消食片的功效是？", o:["镇咳祛痰","消食化积、健脾开胃","降低血糖","收敛止痒"], a:1, e:"用于食积、腹胀，属消食类中成药。"},
+        {q:"炉甘石洗剂常用于？", o:["蚊虫叮咬、湿疹等皮肤瘙痒的收敛止痒","口腔溃疡","胃酸过多","发热"], a:0, e:"炉甘石洗剂是外用药，收敛止痒，涂在皮肤上。"},
+        {q:"氯苯那敏（扑尔敏）的主要作用是？", o:["抗过敏，缓解打喷嚏、流涕","解热镇痛","抗菌消炎","补充钙质"], a:0, e:"扑尔敏是经典抗过敏药，注意服药后可能嗜睡。"},
+        {q:"二甲双胍的适应症是？", o:["心绞痛","2 型糖尿病（降低血糖）","骨质疏松","过敏性鼻炎"], a:1, e:"二甲双胍是降糖药，用于 2 型糖尿病。"},
+        {q:"硝酸甘油缓解心绞痛的机制是？", o:["扩张冠状动脉","抑制胃酸分泌","抑制细菌生长","促进消化"], a:0, e:"硝酸甘油扩张冠状动脉，改善心肌供血。"},
+        {q:"钙片主要用于？", o:["补充钙质，预防和改善骨质疏松、手足抽筋","退烧","抗过敏","止泻"], a:0, e:"钙片属营养补充剂，补钙为主。"},
+        {q:"「青霉素」属于？", o:["抗生素（β-内酰胺类）","抗生素（喹诺酮类）","清热解毒类中药","外用糖皮质激素药"], a:0, e:"青霉素是 β-内酰胺类抗生素的开山代表。"},
+        {q:"「左氧氟沙星」属于？", o:["抗生素（β-内酰胺类）","抗生素（喹诺酮类）","止泻药","维生素补充剂"], a:1, e:"左氧氟沙星属喹诺酮类抗菌药。"},
+        {q:"「金银花」属于？", o:["清热解毒类中药","消食化积类中药","镇咳祛痰类中成药","抗过敏药"], a:0, e:"金银花清热解毒，常出现在感冒类中成药里。"},
+        {q:"「山楂」属于？", o:["清热解毒类中药","消食化积类中药","止泻药","外用活血药"], a:1, e:"山楂消食化积，与健胃消食片同一路数。"},
+        {q:"「复方甘草片」属于？", o:["镇咳祛痰类中成药","抑酸护胃药","解热镇痛药","维生素补充剂"], a:0, e:"复方甘草片镇咳祛痰，属中成药。"},
+        {q:"「蒙脱石散」属于？", o:["止泻药","抑酸护胃药","止咳化痰药","外用消毒药"], a:0, e:"蒙脱石散吸附肠道内容物，用于止泻。"},
+        {q:"「奥美拉唑」属于？", o:["抑酸护胃药（质子泵抑制剂）","止泻药","抗过敏药","解热镇痛药"], a:0, e:"奥美拉唑抑制胃酸分泌，是质子泵抑制剂。"},
+        {q:"「维生素 C 片」属于？", o:["维生素补充剂","抗生素","中成药","外用药"], a:0, e:"维生素 C 片属维生素补充剂。"},
+        {q:"「皮炎平（复方醋酸地塞米松乳膏）」属于？", o:["外用糖皮质激素药","口服抗过敏药","抗菌药物","解热镇痛药"], a:0, e:"皮炎平是外用糖皮质激素药，不宜长期大面积使用。"},
+        {q:"「云南白药气雾剂」属于？", o:["外用活血散瘀、消肿止痛药","外用糖皮质激素药","消毒防腐药","抑酸护胃药"], a:0, e:"云南白药气雾剂外用活血散瘀、消肿止痛。"}
+      ]
+    },
+    {
+      id:"level3", no:"03", name:"药品传送带", tag:"判断",
+      play:"药盒在传送带上传递，接盒的人判断对错；说错暂停五秒。",
+      goal:"十二句话都来自日常用药场景，错的那几句正是最常见的误区。",
+      count:12, modeLabel:"12 道判断题",
+      cards:"judge",
+      judges:[
+        {s:"感冒发烧时，把阿司匹林和酒精一起服用退烧效果更好。", t:false, e:"错。服药期间饮酒会加重胃肠道刺激，增加胃出血风险，不宜同服。"},
+        {s:"抗生素可以治疗普通病毒性感冒。", t:false, e:"错。抗生素只对细菌有效，对病毒引起的普通感冒无效，不可滥用。"},
+        {s:"过期但外观没有变质的药品，仍然可以照常服用。", t:false, e:"错。过期药品药效下降，部分还可能变质产生有害物质，应及时清理。"},
+        {s:"服药时用温水送服最合适，不建议用茶水、牛奶、咖啡或西柚汁送服。", t:true, e:"对。温水送服最稳妥；茶、咖啡、西柚汁等可能影响药物的吸收或代谢。"},
+        {s:"肠溶片、缓释片可以掰开或嚼碎后服用，更利于吸收。", t:false, e:"错。掰开或嚼碎会破坏剂型，影响疗效或增加不良反应。"},
+        {s:"退烧药在体温未达到需要用药的程度时，无需提前预防性服用。", t:true, e:"对。退烧药按需使用，不提前预防性服用。"},
+        {s:"只要症状好转，就可以自行把剩下的抗生素减量或停药。", t:false, e:"错。应按医嘱足疗程服用，自行减量、停药易导致耐药和病情反复。"},
+        {s:"药品应放在阴凉干燥、避光处保存，并置于儿童接触不到的地方。", t:true, e:"对。避光、避潮、避热，并放在儿童拿不到的地方。"},
+        {s:"同时服用多种药物时，不用考虑药物之间的相互作用。", t:false, e:"错。多种药物同服可能发生相互作用，应先咨询医生或药师。"},
+        {s:"用牛奶送服药物时，牛奶中的钙等成分可能影响部分药物的吸收。", t:true, e:"对。牛奶中的钙可能与部分药物结合，影响吸收。"},
+        {s:"维生素类保健品吃得越多，对身体越有益。", t:false, e:"错。维生素并非越多越好，过量摄入部分维生素也会产生不良反应。"},
+        {s:"皮肤外伤消毒时，碘伏和酒精可以同时大面积混合使用。", t:false, e:"错。二者刺激性不同，混合大面积使用易刺激皮肤，按规范选择其一即可。"}
+      ],
+      qs:[
+        {q:"感冒发烧时，把阿司匹林和酒精一起服用退烧效果更好。", o:["对","错"], a:1, e:"服药期间饮酒会加重胃肠道刺激，增加胃出血风险，不宜同服。", tf:true},
+        {q:"抗生素可以治疗普通病毒性感冒。", o:["对","错"], a:1, e:"抗生素只对细菌有效，对病毒引起的普通感冒无效，不可滥用。", tf:true},
+        {q:"过期但外观没有变质的药品，仍然可以照常服用。", o:["对","错"], a:1, e:"过期药品药效下降，部分还可能变质产生有害物质，应及时清理。", tf:true},
+        {q:"服药时用温水送服最合适，不建议用茶水、牛奶、咖啡或西柚汁送服。", o:["对","错"], a:0, e:"温水送服最稳妥；茶、咖啡、西柚汁等可能影响药物的吸收或代谢。", tf:true},
+        {q:"肠溶片、缓释片可以掰开或嚼碎后服用，更利于吸收。", o:["对","错"], a:1, e:"掰开或嚼碎会破坏剂型，影响疗效或增加不良反应。", tf:true},
+        {q:"退烧药在体温未达到需要用药的程度时，无需提前预防性服用。", o:["对","错"], a:0, e:"退烧药按需使用，不提前预防性服用。", tf:true},
+        {q:"只要症状好转，就可以自行把剩下的抗生素减量或停药。", o:["对","错"], a:1, e:"应按医嘱足疗程服用，自行减量、停药易导致耐药和病情反复。", tf:true},
+        {q:"药品应放在阴凉干燥、避光处保存，并置于儿童接触不到的地方。", o:["对","错"], a:0, e:"避光、避潮、避热，并放在儿童拿不到的地方。", tf:true},
+        {q:"同时服用多种药物时，不用考虑药物之间的相互作用。", o:["对","错"], a:1, e:"多种药物同服可能发生相互作用，应先咨询医生或药师。", tf:true},
+        {q:"用牛奶送服药物时，牛奶中的钙等成分可能影响部分药物的吸收。", o:["对","错"], a:0, e:"牛奶中的钙可能与部分药物结合，影响吸收。", tf:true},
+        {q:"维生素类保健品吃得越多，对身体越有益。", o:["对","错"], a:1, e:"维生素并非越多越好，过量摄入部分维生素也会产生不良反应。", tf:true},
+        {q:"皮肤外伤消毒时，碘伏和酒精可以同时大面积混合使用。", o:["对","错"], a:1, e:"二者刺激性不同，混合大面积使用易刺激皮肤，按规范选择其一即可。", tf:true}
+      ]
+    },
+    {
+      id:"level4", no:"04", name:"药物分类投壶", tag:"归类",
+      play:"抽签读出药品，从对应类别的箭筒里取箭投壶；六投三中即通关。",
+      goal:"先把八类药认全，投壶时抽到哪个名字都能立刻归位。",
+      count:12, modeLabel:"12 道归类题",
+      cards:"catalog",
+      cats:[
+        {name:"解热镇痛药", drugs:["布洛芬","对乙酰氨基酚","阿司匹林","双氯芬酸钠"]},
+        {name:"抗菌药物", drugs:["阿莫西林","头孢呋辛","阿奇霉素","左氧氟沙星","罗红霉素","甲硝唑"]},
+        {name:"清热解毒类中成药", drugs:["双黄连口服液","连花清瘟胶囊","银翘解毒片","板蓝根颗粒","金银花"]},
+        {name:"止咳化痰平喘药", drugs:["复方甘草片","氨溴索","川贝枇杷膏","急支糖浆"]},
+        {name:"消化系统用药", drugs:["健胃消食片","山楂","多潘立酮片","奥美拉唑","蒙脱石散","保和丸"]},
+        {name:"外用药", drugs:["碘伏","酒精","双氧水","炉甘石洗剂","红花油","云南白药气雾剂","皮炎平"]},
+        {name:"维生素与营养补充剂", drugs:["维生素 A","维生素 C","维生素 E","钙片","维生素 D","骨化三醇"]},
+        {name:"抗过敏药", drugs:["氯苯那敏（扑尔敏）","氯雷他定","西替利嗪"]}
+      ],
+      faq:[
+        {q:"买药时首先要看清药品的哪些信息？", a:"药品名称、适应症、用法用量、生产日期、有效期、批准文号、生产厂家、不良反应、禁忌、注意事项。"},
+        {q:"家里存放药品要注意哪些事项？", a:"避光、避潮、避热，放在干燥阴凉处，部分药品需冷藏；放在儿童接触不到的地方；定期清理过期药物；内服与外用药分开存放；挥发性药物密封保存。"},
+        {q:"服药期间一般不宜多吃哪些食物？", a:"辛辣食物、油腻食物、酒类、浓茶、咖啡、西柚、牛奶（视药物而定）、高盐食物等。"},
+        {q:"常见的给药途径有哪些？", a:"口服、注射（静脉注射、肌肉注射、皮下注射、皮内注射等）、吸入、舌下含服、直肠给药、皮肤外用（贴剂）、鼻腔给药、眼部给药、耳部给药等。"},
+        {q:"常见的药品剂型有哪些？", a:"片剂、胶囊剂、注射剂、丸剂、散剂、颗粒剂、口服液体制剂、栓剂、软膏剂、贴剂等。"},
+        {q:"皮肤擦伤后，药房常见的外用消毒药物有哪些？", a:"碘伏、酒精、双氧水。"}
+      ],
+      qs:[
+        {q:"「布洛芬」属于哪一类？", o:["解热镇痛药","抗菌药物","外用药","抗过敏药"], a:0, e:"布洛芬、对乙酰氨基酚、阿司匹林、双氯芬酸钠同属解热镇痛药。"},
+        {q:"「头孢呋辛」属于哪一类？", o:["抗过敏药","抗菌药物","消化系统用药","维生素与营养补充剂"], a:1, e:"头孢呋辛是头孢类抗菌药物。"},
+        {q:"「连花清瘟胶囊」属于哪一类？", o:["止咳化痰平喘药","清热解毒类中成药","解热镇痛药","外用药"], a:1, e:"连花清瘟胶囊属清热解毒类中成药。"},
+        {q:"「氨溴索」属于哪一类？", o:["消化系统用药","抗过敏药","止咳化痰平喘药","抗菌药物"], a:2, e:"氨溴索是祛痰药，归入止咳化痰平喘药。"},
+        {q:"「多潘立酮片」属于哪一类？", o:["消化系统用药","解热镇痛药","维生素与营养补充剂","外用药"], a:0, e:"多潘立酮促进胃肠动力，属消化系统用药。"},
+        {q:"「碘伏」属于哪一类？", o:["抗菌药物","外用药","消化系统用药","抗过敏药"], a:1, e:"碘伏是外用消毒药，不口服。"},
+        {q:"「骨化三醇」属于哪一类？", o:["维生素与营养补充剂","止咳化痰平喘药","抗菌药物","解热镇痛药"], a:0, e:"骨化三醇是活性维生素 D，归入维生素与营养补充剂。"},
+        {q:"「氯雷他定」属于哪一类？", o:["解热镇痛药","消化系统用药","抗过敏药","清热解毒类中成药"], a:2, e:"氯雷他定是抗组胺抗过敏药。"},
+        {q:"「双黄连口服液」属于哪一类？", o:["外用药","清热解毒类中成药","维生素与营养补充剂","止咳化痰平喘药"], a:1, e:"双黄连口服液属清热解毒类中成药。"},
+        {q:"「川贝枇杷膏」属于哪一类？", o:["抗菌药物","解热镇痛药","止咳化痰平喘药","消化系统用药"], a:2, e:"川贝枇杷膏止咳化痰，属止咳化痰平喘药。"},
+        {q:"「保和丸」属于哪一类？", o:["抗过敏药","消化系统用药","外用药","清热解毒类中成药"], a:1, e:"保和丸消食导滞，归入消化系统用药。"},
+        {q:"「西替利嗪」属于哪一类？", o:["维生素与营养补充剂","止咳化痰平喘药","抗菌药物","抗过敏药"], a:3, e:"西替利嗪与氯雷他定同为抗过敏药。"}
+      ]
+    }
+  ];
+
+  var $hub = document.getElementById("hub");
+  var $view = document.getElementById("levelView");
+  var $list = document.getElementById("levelList");
+  var $nav = document.getElementById("nav");
+  var store = {};
+  try{ store = JSON.parse(localStorage.getItem("yxj-best") || "{}"); }catch(e){ store = {}; }
+  var state = { mode:"cards", quiz:{}, openFaq:{} };
+
+  function levelById(id){
+    for(var i=0;i<LEVELS.length;i++){ if(LEVELS[i].id===id) return LEVELS[i]; }
+    return null;
+  }
+  function esc(s){
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  /* ---------- 总览 ---------- */
+  function renderList(){
+    $list.innerHTML = LEVELS.map(function(L){
+      var best = store[L.id];
+      return '<div class="level-row">'+
+        '<div class="no">'+L.no+'<small>关卡</small></div>'+
+        '<div>'+
+          '<h3 class="level-name">'+esc(L.name)+'</h3>'+
+          '<p class="level-play">'+esc(L.play)+'</p>'+
+          '<div class="chips"><span class="chip">'+esc(L.tag)+'</span><span class="chip">'+L.count+' 题</span>'+
+          (best ? '<span class="chip best">最佳 '+best+'/'+L.count+'</span>' : '')+
+          '</div>'+
+          '<div class="actions">'+
+            '<button class="btn btn-primary" data-enter="'+L.id+'">进入学习</button>'+
+            '<button class="btn btn-ghost" data-quiz="'+L.id+'">直接自测</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    }).join("");
+  }
+
+  /* ---------- 关卡页 ---------- */
+  function renderLevel(L){
+    state.mode = state.mode || "cards";
+    $view.innerHTML =
+      '<div class="view-head">'+
+        '<div class="crumb"><button data-go="">总览</button><span>/</span><span>第'+L.no+'关</span></div>'+
+        '<div class="view-no">第 '+L.no+' 关</div>'+
+        '<h1>'+esc(L.name)+'</h1>'+
+        '<p class="view-goal">'+esc(L.goal)+'</p>'+
+      '</div>'+
+      '<div class="modes" role="group" aria-label="学习方式">'+
+        '<button class="modebtn" data-mode="cards" aria-pressed="'+(state.mode==="cards")+'">知识卡</button>'+
+        '<button class="modebtn" data-mode="quiz" aria-pressed="'+(state.mode==="quiz")+'">自测 · '+L.modeLabel+'</button>'+
+      '</div>'+
+      '<div id="levelBody"></div>';
+    renderBody(L);
+  }
+
+  function renderBody(L){
+    var body = document.getElementById("levelBody");
+    if(state.mode === "cards") body.innerHTML = cardsHTML(L);
+    else body.innerHTML = quizHTML(L);
+  }
+
+  function cardsHTML(L){
+    if(L.cards === "pairs"){
+      var groups = ["药品与功效","药品与分类"];
+      var out = '<p class="card-note">先读一遍清单，再切到自测。左边药品，右边是它要连到的答案。</p>';
+      groups.forEach(function(g){
+        var items = L.pairs.filter(function(p){ return p.g === g; });
+        out += '<div class="group-title"><h3>'+g+'</h3><span>'+items.length+' 组</span></div>';
+        out += items.map(function(p){
+          return '<div class="pair-row"><span class="pair-a">'+esc(p.a)+'</span><span class="pair-b">'+esc(p.b)+'</span></div>';
+        }).join("");
+      });
+      return out;
+    }
+    if(L.cards === "judge"){
+      var out = '<p class="card-note">每题都标了答案和原因。错的那几句，记的其实是正确的做法。</p>';
+      out += L.judges.map(function(j, i){
+        return '<div class="judge-item">'+
+          '<div class="judge-idx">'+String(i+1).padStart(2,"0")+'</div>'+
+          '<div><p class="judge-s"><span class="tag '+(j.t?"t":"f")+'">'+(j.t?"对":"错")+'</span>'+esc(j.s)+'</p>'+
+          '<p class="exp">'+esc(j.e)+'</p></div>'+
+        '</div>';
+      }).join("");
+      return out;
+    }
+    // catalog
+    var out = '<p class="card-note">八类药先过一遍眼；抽到药名时，能立刻想起它该进哪个箭筒。</p>';
+    out += '<div class="cats">'+L.cats.map(function(c){
+      return '<div class="cat"><h4>'+esc(c.name)+'</h4><div class="drugs">'+
+        c.drugs.map(function(d){ return '<span class="drug">'+esc(d)+'</span>'; }).join("")+
+      '</div></div>';
+    }).join("")+'</div>';
+    out += '<div class="group-title" style="margin-top:34px"><h3>投壶失败时的加机会题</h3><span>答对可多投一箭</span></div>';
+    out += '<div class="faq">'+L.faq.map(function(f, i){
+      return '<div class="faq-item" data-faq="'+i+'">'+
+        '<button class="faq-q" type="button" data-toggle="'+i+'"><span>'+esc(f.q)+'</span><span class="plus" aria-hidden="true">+</span></button>'+
+        '<div class="faq-a">'+esc(f.a)+'</div>'+
+      '</div>';
+    }).join("")+'</div>';
+    return out;
+  }
+
+  /* ---------- 自测 ---------- */
+  function quizState(id){
+    if(!state.quiz[id]) state.quiz[id] = { idx:0, picked:null, answers:[] };
+    return state.quiz[id];
+  }
+
+  function quizHTML(L){
+    var st = quizState(L.id);
+    var qs = L.qs;
+    if(st.idx >= qs.length) return resultHTML(L);
+
+    var q = qs[st.idx];
+    var pct = Math.round(st.idx / qs.length * 100);
+    var opts = q.o.map(function(text, i){
+      var cls = "opt";
+      if(st.picked !== null){
+        if(i === q.a) cls += " correct";
+        else if(i === st.picked) cls += " wrong";
+        else cls += " dim";
+      }
+      return '<button type="button" class="'+cls+'" data-opt="'+i+'" '+(st.picked!==null?"disabled":"")+'>'+
+        '<span class="k">'+String.fromCharCode(65+i)+'</span><span>'+esc(text)+'</span></button>';
+    }).join("");
+
+    var feedback = "";
+    if(st.picked !== null){
+      var ok = st.picked === q.a;
+      feedback = '<div class="feedback" aria-live="polite">'+
+        '<span class="verdict '+(ok?"ok":"no")+'">'+(ok?"答对了":"答错了，正确答案是 "+String.fromCharCode(65+q.a)+"")+'</span>'+
+        '<p>'+esc(q.e)+'</p></div>';
+    }
+
+    return '<div class="quiz-box">'+
+      '<div class="qbar"><b>第 '+(st.idx+1)+' / '+qs.length+' 题</b><span>'+(q.tf?"判断题":"单选题")+'</span></div>'+
+      '<div class="track"><i style="width:'+pct+'%"></i></div>'+
+      '<p class="qtext">'+esc(q.q)+'</p>'+
+      opts + feedback +
+      '<div class="quiz-foot">'+
+        (st.picked!==null ? '<button class="btn btn-primary" data-next="1">'+(st.idx===qs.length-1?"看结果":"下一题")+'</button>' : '')+
+      '</div></div>';
+  }
+
+  function resultHTML(L){
+    var st = quizState(L.id);
+    var right = st.answers.filter(function(a){ return a.ok; }).length;
+    var total = L.qs.length;
+    var rate = Math.round(right / total * 100);
+    var best = store[L.id] || 0;
+    if(right > best){ best = right; store[L.id] = best; try{ localStorage.setItem("yxj-best", JSON.stringify(store)); }catch(e){} }
+
+    var misses = st.answers.filter(function(a){ return !a.ok; });
+    var missHTML = misses.length
+      ? '<h3>错题回看</h3><div class="miss">'+misses.map(function(a){
+          var q = L.qs[a.i];
+          return '<div class="miss-item"><b>'+esc(q.q)+'</b><span>正确答案：'+esc(q.o[q.a])+'　'+esc(q.e)+'</span></div>';
+        }).join("")+'</div>'
+      : '<h3>全部答对</h3><p class="card-note">这一关的知识点已经拿稳了，可以回知识卡再扫一遍。</p>';
+
+    return '<div class="quiz-box"><div class="result">'+
+      '<div class="score">'+right+'<span> / '+total+' 题</span></div>'+
+      '<p class="rate">正确率 '+rate+'%　·　本关最佳 '+best+'/'+total+'</p>'+
+      missHTML+
+      '<div class="result-actions">'+
+        '<button class="btn btn-primary" data-retry="1">再测一次</button>'+
+        '<button class="btn btn-ghost" data-mode="cards">回知识卡</button>'+
+      '</div>'+
+    '</div></div>';
+  }
+
+  /* ---------- 路由与事件 ---------- */
+  function render(){
+    var id = location.hash.replace("#","");
+    var L = levelById(id);
+    if(L){
+      $hub.hidden = true;
+      $view.hidden = false;
+      renderLevel(L);
+    }else{
+      $view.hidden = true;
+      $hub.hidden = false;
+      renderList();
+    }
+    Array.prototype.forEach.call($nav.children, function(b){
+      b.setAttribute("aria-current", b.getAttribute("data-go") === (L?L.id:"") ? "true" : "false");
+    });
+    window.scrollTo(0,0);
+  }
+
+  function go(id){
+    if(id) location.hash = id;
+    else { location.hash = ""; }
+    render();
+  }
+
+  document.addEventListener("click", function(e){
+    var t = e.target.closest("[data-enter],[data-quiz],[data-go],[data-mode],[data-opt],[data-next],[data-retry],[data-toggle]");
+    if(!t) return;
+
+    if(t.hasAttribute("data-enter")){ state.mode="cards"; go(t.getAttribute("data-enter")); return; }
+    if(t.hasAttribute("data-quiz")){ go(t.getAttribute("data-quiz")); state.mode="quiz"; render(); return; }
+    if(t.hasAttribute("data-go")){ var g=t.getAttribute("data-go"); if(g) go(g); else { state.mode="cards"; go(""); } return; }
+
+    var L = levelById(location.hash.replace("#",""));
+    if(!L) return;
+
+    if(t.hasAttribute("data-mode")){
+      state.mode = t.getAttribute("data-mode");
+      renderLevel(L);
+      return;
+    }
+    if(t.hasAttribute("data-opt")){
+      var st = quizState(L.id);
+      if(st.picked !== null) return;
+      st.picked = Number(t.getAttribute("data-opt"));
+      st.answers.push({ i:st.idx, ok: st.picked === L.qs[st.idx].a });
+      renderBody(L);
+      return;
+    }
+    if(t.hasAttribute("data-next")){
+      var st2 = quizState(L.id);
+      st2.idx++; st2.picked = null;
+      renderBody(L);
+      return;
+    }
+    if(t.hasAttribute("data-retry")){
+      state.quiz[L.id] = { idx:0, picked:null, answers:[] };
+      renderBody(L);
+      return;
+    }
+    if(t.hasAttribute("data-toggle")){
+      var item = t.closest(".faq-item");
+      item.classList.toggle("open");
+      var open = item.classList.contains("open");
+      t.setAttribute("aria-expanded", open ? "true" : "false");
+      return;
+    }
+  });
+
+  window.addEventListener("hashchange", render);
+  render();
+})();
+</script>
+</body>
+</html>
